@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     String enlistmentdate;
     //String serviceduration;
-    //int servicedurationint;
     String orddate;
     String numofdays;
     String leavequota;
