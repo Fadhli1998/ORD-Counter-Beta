@@ -52,7 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         showOrdDate(); //show ord date on settings launch
         showLeaveQuota(); // show Leave Quota on settings launch
         showOffQuota(); // show Off Quota on settings launch
-        
+
         //Button for Calendar Dialog to allow user to set ORD date
         setorddateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,31 +88,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    //Functions
-
-    /*show Enlistment Date from file on settings launch function
-    public void showEnlistmentDate(){
-
-        try{
-            FileInputStream fIn = openFileInput("enlistmentdate.txt");
-            InputStreamReader isr = new InputStreamReader(fIn);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line);
-            }
-            enlistmentdate = sb.toString();
-            enlistmentdateTextView = findViewById(R.id.enlistmentdateTextView);
-            enlistmentdateTextView.setText(enlistmentdate);
-            System.out.println("Enlistment Date from file: " + enlistmentdate);
-        }
-        catch(IOException e)
-        {
-
-        }
-
-    }*/
 
     //show ORD Date from file on settings launch function from file
     public void showOrdDate(){
