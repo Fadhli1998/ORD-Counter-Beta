@@ -14,3 +14,6 @@
 
 **Bugs to fix:**
 * Input validation
+
+**Bugs fixed:**
+* Disallowed backup in Manifest.xml as it was affecting reinstallation
