@@ -65,7 +65,7 @@ public class ServiceDurationActivity extends AppCompatActivity {
 
                 }
 
-                if(radioValue.equals("2 Years"))
+                if(radioValue.equals("2 YEARS"))
                 {
                     servicedurationint = 730;
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -110,7 +110,7 @@ public class ServiceDurationActivity extends AppCompatActivity {
                     }
                     System.out.println("Estimated ORD Date activity: " + orddate);
                 }
-                else if (radioValue.equals("1 Year 10 Months"))
+                else if (radioValue.equals("1 YEAR 10 MONTHS"))
                 {
                     servicedurationint = 669;
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

@@ -98,7 +98,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/white"
+            android:buttonTint="@android:color/white"
             android:fontFamily="@font/avenirbold"
             android:text="1 YEAR 10 MONTHS"
             android:textColor="@android:color/white"

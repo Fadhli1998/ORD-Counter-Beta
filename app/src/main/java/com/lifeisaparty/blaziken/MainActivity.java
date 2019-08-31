@@ -136,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 int currentmonth = Calendar.getInstance().get(Calendar.MONTH);
                 int currentyear = Calendar.getInstance().get(Calendar.YEAR);
 
-                int testmonth = 11; //For testing purposes
 
                 if(currentyear == 11)
                 {
