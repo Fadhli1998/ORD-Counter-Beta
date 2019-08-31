@@ -25,7 +25,6 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 
     String enlistmentdate;
-    //String serviceduration;
     String orddate;
     String numofdays;
     String leavequota;
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     String year;
     String paydaydatestring;
     String numofdaystopayday;
-    //FileOutputStream fstream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -39,9 +39,6 @@ public class SettingsActivity extends AppCompatActivity {
     FileOutputStream fstream;
     EditText leavequotaEditText;
     EditText offquotaEditText;
-    double leavequotatowritecheck;
-    int leavequotawritelength;
-    char leavequotawritechar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,28 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         showOrdDate(); //show ord date on settings launch
         showLeaveQuota(); // show Leave Quota on settings launch
         showOffQuota(); // show Off Quota on settings launch
-
-        /*Button for Calendar Dialog to allow user to set Enlistment date
-        setenlistmentdateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                c = Calendar.getInstance();
-                int day = c.get(Calendar.DAY_OF_MONTH);
-                int month = c.get(Calendar.MONTH);
-                int year = c.get(Calendar.YEAR);
-                dpd = new DatePickerDialog(SettingsActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
-                        tempenlistmentdate = mDay + "/" + (mMonth+1) + "/" + mYear;
-                        enlistmentdateTextView.setText(tempenlistmentdate); //set ord date to Text View
-                    }
-                }, year, month, day);
-                dpd.show();
-
-            }
-        });*/
-
+        
         //Button for Calendar Dialog to allow user to set ORD date
         setorddateButton.setOnClickListener(new View.OnClickListener() {
             @Override
