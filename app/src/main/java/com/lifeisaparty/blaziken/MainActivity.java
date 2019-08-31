@@ -135,12 +135,19 @@ public class MainActivity extends AppCompatActivity {
 
                 int currentmonth = Calendar.getInstance().get(Calendar.MONTH);
                 int currentyear = Calendar.getInstance().get(Calendar.YEAR);
+                int currentday = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+                System.out.println(currentday);
 
 
                 if(currentyear == 11)
                 {
                     currentyear = currentyear + 1;
                     System.out.println("DID IT WORK: " + currentyear);
+                }
+                else if(currentday <= 10)
+                {
+                    currentmonth = currentmonth + 1;
                 }
                 else{
                     currentmonth = currentmonth + 2;
