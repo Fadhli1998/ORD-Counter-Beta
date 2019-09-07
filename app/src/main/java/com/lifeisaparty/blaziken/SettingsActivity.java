@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -39,6 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
     FileOutputStream fstream;
     EditText leavequotaEditText;
     EditText offquotaEditText;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,14 @@ public class SettingsActivity extends AppCompatActivity {
         savebutton = findViewById(R.id.savebutton);
         setorddateButton = findViewById(R.id.setorddateButton);
         orddateTextView = findViewById(R.id.orddateTextView);
+        adView = findViewById(R.id.adView);
+
+        MobileAds.initialize(this, "ca-app-pub-2502682919080610~9363656451");
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("BEFCC33F15BE0781B429954DD2897110")
+                .build();
+        adView.loadAd(adRequest);
 
         showOrdDate(); //show ord date on settings launch
         showLeaveQuota(); // show Leave Quota on settings launch

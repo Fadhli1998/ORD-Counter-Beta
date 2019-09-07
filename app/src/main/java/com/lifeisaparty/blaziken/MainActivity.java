@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
@@ -29,16 +33,23 @@ public class MainActivity extends AppCompatActivity {
     String numofdays;
     String leavequota;
     String offquota;
+    String serviceduration;
     TextView numofdaysTextView;
     TextView orddateTextView;
     TextView leavequotaTextView;
     TextView offquotaTextView;
     TextView daystoord;
     TextView daystopayday;
+    TextView percentage;
     String month;
     String year;
     String paydaydatestring;
     String numofdaystopayday;
+    String numofdayspercentage;
+    int percentagevalue;
+    int numofdaysint;
+    int servicedurationint;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
         leavequotaTextView = findViewById(R.id.leavequotaTextView);
         offquotaTextView = findViewById(R.id.offquotaTextView);
         daystoord = findViewById(R.id.daystoord);
+        adView = findViewById(R.id.adView);
+
+        MobileAds.initialize(this, "ca-app-pub-2502682919080610~9363656451");
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("BEFCC33F15BE0781B429954DD2897110")
+                .build();
+        adView.loadAd(adRequest);
 
         //Check if enlistmentdate.txt exists in Internal Storage. If enlistmentdate.txt does not exist, the rest does not exist. *bug needs to fix.
         try{
@@ -87,6 +106,33 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+            try
+            {
+                FileInputStream fIn1 = openFileInput("serviceduration.txt");
+                InputStreamReader isr1 = new InputStreamReader(fIn1);
+                BufferedReader bufferedReader1 = new BufferedReader(isr1);
+                StringBuilder sb1 = new StringBuilder();
+                String line1;
+                while ((line1 = bufferedReader1.readLine()) != null) {
+                    sb1.append(line1);
+                }
+                serviceduration = sb1.toString();
+
+                if(serviceduration.equals("2 YEARS"))
+                {
+                    servicedurationint = 730;
+                }
+                else
+                {
+                    servicedurationint = 669;
+                }
+
+            }
+            catch (IOException e)
+            {
+
+            }
+
             SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
             try
             {
@@ -96,10 +142,29 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Todays Date: " + formattedcurrentdate);
                 Date orddateend = sdf2.parse(orddate);
 
-                long diff = orddateend.getTime() - currentdate.getTime(); //calculate number of days between enlistment date and ord date
+                long diff = orddateend.getTime() - currentdate.getTime(); //calculate number of days between current date and ord date
                 long diff1 = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
                 numofdays = Long.toString(diff1); //converting long to string so as to be able to use variable as string
+                numofdaysint = servicedurationint - (int)diff1;
                 System.out.println("Number of Days till ORD: " + numofdays);
+
+                //calculate percentage towards civilian life
+                percentagevalue = (numofdaysint * 100)/servicedurationint;
+
+                numofdayspercentage = Integer.toString(percentagevalue);
+                System.out.println(numofdayspercentage);
+
+                percentage = findViewById(R.id.percentage);
+
+                if(numofdayspercentage.equals("100"))
+                {
+                    percentage.setText("FINALLY A CIVILIAN!");
+                }
+                else{
+                    percentage.setText(numofdayspercentage + "% TO CIVILIAN LIFE");
+                }
+
+
 
                 if(numofdays.equals("0")) //if number of days equals to 0, display ORDLO instead
                 {
@@ -111,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                     daystoord.setText("DAY TO ORD");
                 }
                 else if(numofdays.charAt(0) == '-'){
-                    numofdays = "ORDLO!";
+                    numofdays = "WADIO!";
                     daystoord.setText("BRO, YOU ORD ALREADY...");
                 }
 

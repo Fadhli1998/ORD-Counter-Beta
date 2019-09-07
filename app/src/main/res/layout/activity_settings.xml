@@ -25,13 +25,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.011" />
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="ca-app-pub-2502682919080610/8271449527"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="257dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="SETTINGS"
@@ -40,28 +52,25 @@
         android:textStyle="bold"
         app:fontFamily="@font/avenirbold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="53dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_corner"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13999999">
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,7 +85,7 @@
                 android:layout_marginLeft="7dp"
                 android:text="ORD DATE:"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:fontFamily="@font/avenirbold" />
 
             <TextView
@@ -95,11 +104,11 @@
             <Button
                 android:id="@+id/setorddateButton"
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/calendarwhite" />
+                android:background="@drawable/calendarwhite2" />
 
         </LinearLayout>
     </LinearLayout>
@@ -107,20 +116,17 @@
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="53dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_corner"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-        app:layout_constraintVertical_bias="0.01999998">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -132,47 +138,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="30dp"
+                android:layout_margin="5dp"
                 android:text="LEAVE QUOTA"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
                 android:textStyle="bold"
                 app:fontFamily="@font/avenirbold" />
 
             <EditText
                 android:id="@+id/leavequotaEditText"
-                android:layout_width="55dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="numberDecimal"
-                android:text="6"
+                android:text="45"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:backgroundTint="@android:color/white"/>
-
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="53dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_corner"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
-        app:layout_constraintVertical_bias="0.01999998">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -184,32 +182,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center|left"
+                android:layout_margin="5dp"
                 android:text="OFF QUOTA"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 app:fontFamily="@font/avenirbold" />
 
             <EditText
                 android:id="@+id/offquotaEditText"
-                android:layout_width="55dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="0"
                 android:inputType="numberDecimal"
-                android:text="6"
+                android:text="45"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
                 android:textStyle="bold"
                 android:backgroundTint="@android:color/white"/>
-
         </LinearLayout>
     </LinearLayout>
 
