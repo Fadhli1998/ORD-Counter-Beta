@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#121212">
+    android:background="#152642">
 
 
     <Button
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@color/cardview_shadow_end_color"
-                app:srcCompat="@drawable/leavewhite" />
+                app:srcCompat="@drawable/leavewhite2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,7 +134,7 @@
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                app:srcCompat="@drawable/offwhite" />
+                app:srcCompat="@drawable/offwhite2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -192,7 +192,7 @@
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                app:srcCompat="@drawable/ordwhite" />
+                app:srcCompat="@drawable/ordwhite2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -249,6 +249,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="69dp"
                 android:layout_marginTop="40dp"
+                android:layout_marginBottom="2dp"
                 android:gravity="center"
                 android:text="420"
                 android:textColor="@android:color/white"
@@ -263,25 +264,34 @@
                 android:layout_marginTop="0dp"
                 android:gravity="center"
                 android:text="DAYS TO ORD"
-                android:textColor="@android:color/white"
+                android:textColor="#33d533"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:fontFamily="@font/avenirbold" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/percentage"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="10"
-                    android:textColor="@android:color/white"
+                    android:text="50%"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textStyle="bold"
                     app:fontFamily="@font/avenirbold" />
 
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" TO CIVILIAN LIFE"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/avenirbold" />
             </LinearLayout>
 
         </LinearLayout>
@@ -313,7 +323,7 @@
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                app:srcCompat="@drawable/paydaywhite" />
+                app:srcCompat="@drawable/paydaywhite2" />
 
             <LinearLayout
                 android:layout_width="match_parent"

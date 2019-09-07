@@ -156,12 +156,12 @@ public class MainActivity extends AppCompatActivity {
 
                 percentage = findViewById(R.id.percentage);
 
-                if(numofdayspercentage.equals("100"))
+                if(percentagevalue >= 100)
                 {
                     percentage.setText("FINALLY A CIVILIAN!");
                 }
                 else{
-                    percentage.setText(numofdayspercentage + "% TO CIVILIAN LIFE");
+                    percentage.setText(numofdayspercentage + "%");
                 }
 
 
@@ -232,8 +232,15 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Number of Days till Payday: " + numofdaystopayday);
 
                 daystopayday = findViewById(R.id.daystopaydayTextView);
-                daystopayday.setText(numofdaystopayday);
 
+                if(numofdaystopayday.equals("0"))
+                {
+                    daystopayday.setText("PAYDAY!");
+                }
+                else
+                {
+                    daystopayday.setText(numofdaystopayday);
+                }
 
             }
             catch(ParseException e)
