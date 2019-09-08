@@ -1,6 +1,6 @@
 # ORDcounter
 
-## Version 1.0.1 caa 08/09/2019
+## Version 1.0.2 caa 08/09/2019
 
 **Updates:**
 * Added Payday Counter
