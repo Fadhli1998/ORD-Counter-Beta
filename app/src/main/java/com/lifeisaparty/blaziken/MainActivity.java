@@ -4,6 +4,7 @@ package com.lifeisaparty.blaziken;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     TextView offquotaTextView;
     TextView daystoord;
     TextView daystopayday;
+    TextView daystopaydaysign;
     TextView percentage;
     String month;
     String year;
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(percentagevalue >= 100)
                 {
-                    percentage.setText("FINALLY A CIVILIAN!");
+                    percentage.setText("100%");
                 }
                 else{
                     percentage.setText(numofdayspercentage + "%");
@@ -235,7 +237,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if(numofdaystopayday.equals("0"))
                 {
+                    daystopaydaysign = findViewById(R.id.daystopayday);
+                    daystopaydaysign.setText("TODAY IS...");
                     daystopayday.setText("PAYDAY!");
+                    daystopayday.setTextColor(Color.parseColor("#33d533"));
                 }
                 else
                 {
