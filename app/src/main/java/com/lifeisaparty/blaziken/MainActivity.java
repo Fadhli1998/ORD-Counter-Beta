@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 numofdaysint = servicedurationint - (int)diff1;
                 System.out.println("Number of Days till ORD: " + numofdays);
 
-                //calculate percentage towards civilian life
+                //calculating percentage towards civilian life
                 percentagevalue = (numofdaysint * 100)/servicedurationint;
 
                 numofdayspercentage = Integer.toString(percentagevalue);
@@ -235,12 +235,12 @@ public class MainActivity extends AppCompatActivity {
 
                 daystopayday = findViewById(R.id.daystopaydayTextView);
 
-                if(numofdaystopayday.equals("0"))
+                if(numofdaystopayday.equals("0")) //if day to payday is equal to 0, change paydaysign to "TODAY IS..." and text to "PAYDAY!"
                 {
                     daystopaydaysign = findViewById(R.id.daystopayday);
                     daystopaydaysign.setText("TODAY IS...");
                     daystopayday.setText("PAYDAY!");
-                    daystopayday.setTextColor(Color.parseColor("#33d533"));
+                    daystopayday.setTextColor(Color.parseColor("#33d533")); //set text colour to green
                 }
                 else
                 {
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-
+            //Get leave and off quota from file and display to activity
             try{
                 FileInputStream fIn1 = openFileInput("leavequota.txt");
                 InputStreamReader isr1 = new InputStreamReader(fIn1);
