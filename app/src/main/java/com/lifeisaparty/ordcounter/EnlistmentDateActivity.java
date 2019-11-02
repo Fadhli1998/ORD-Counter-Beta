@@ -1,4 +1,4 @@
-package com.lifeisaparty.blaziken;
+package com.lifeisaparty.ordcounter;
 
 import androidx.appcompat.app.AppCompatActivity;
 

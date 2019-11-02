@@ -1,4 +1,4 @@
-package com.lifeisaparty.blaziken;
+package com.lifeisaparty.ordcounter;
 //Note all System.out.println are to display each steps as breakpoint
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +14,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
