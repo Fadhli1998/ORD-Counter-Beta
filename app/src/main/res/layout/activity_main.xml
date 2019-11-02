@@ -85,11 +85,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="DAY(S) OF LEAVE"
+                    android:text="Days of Leave"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/avenirbold" />
+                    app:fontFamily="@font/nexabold" />
 
                 <TextView
                     android:id="@+id/leavequotaTextView"
@@ -98,8 +97,7 @@
                     android:text="6"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/avenirbold" />
+                    app:fontFamily="@font/nexabold" />
             </LinearLayout>
 
         </LinearLayout>
@@ -145,11 +143,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="DAYS(S) OFF"
+                    android:text="Days OFF"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/avenirbold" />
+                    app:fontFamily="@font/nexabold" />
 
                 <TextView
                     android:id="@+id/offquotaTextView"
@@ -158,8 +155,7 @@
                     android:text="6"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/avenirbold" />
+                    app:fontFamily="@font/nexabold" />
 
             </LinearLayout>
 
@@ -203,21 +199,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="ORD DATE"
+                    android:text="ORD Date"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/avenirbold" />
+                    app:fontFamily="@font/nexabold" />
 
                 <TextView
                     android:id="@+id/orddateTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="28/08/2019"
+                    android:text="28 Nov 2021"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/avenirbold" />
+                    app:fontFamily="@font/nexabold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -254,7 +248,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="70sp"
                 android:textStyle="bold"
-                app:fontFamily="@font/avenirbold" />
+                app:fontFamily="@font/nexabold" />
 
             <TextView
                 android:id="@+id/daystoord"
@@ -263,11 +257,10 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
                 android:gravity="center"
-                android:text="DAYS TO ORD"
+                android:text="Days to ORD"
                 android:textColor="#33d533"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                app:fontFamily="@font/avenirbold" />
+                app:fontFamily="@font/nexabold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -280,16 +273,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="50%"
-                    android:textColor="#FF0000"
-                    app:fontFamily="@font/avenirbold" />
+                    android:textColor="#ffff00"
+                    app:fontFamily="@font/nexabold" />
 
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" TO CIVILIAN LIFE"
+                    android:text=" towards civilian life"
                     android:textColor="@android:color/white"
-                    app:fontFamily="@font/avenirbold" />
+                    android:textStyle="bold"
+                    app:fontFamily="@font/nexabold" />
             </LinearLayout>
 
         </LinearLayout>
@@ -333,10 +327,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="DAY(S) TO PAYDAY"
+                    android:text="Days to Payday"
                     android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/avenirbold" />
+                    app:fontFamily="@font/nexabold" />
 
                 <TextView
                     android:id="@+id/daystopaydayTextView"
@@ -344,7 +337,8 @@
                     android:layout_height="wrap_content"
                     android:text="6"
                     android:textColor="@android:color/white"
-                    app:fontFamily="@font/avenirbold" />
+                    android:textStyle="bold"
+                    app:fontFamily="@font/nexabold" />
             </LinearLayout>
 
         </LinearLayout>

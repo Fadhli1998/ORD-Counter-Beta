@@ -40,11 +40,13 @@ public class MainActivity extends AppCompatActivity {
     TextView daystopayday;
     TextView daystopaydaysign;
     TextView percentage;
+    TextView textview5;
     String month;
     String year;
     String paydaydatestring;
     String numofdaystopayday;
     String numofdayspercentage;
+    String strDate;
     int percentagevalue;
     int numofdaysint;
     int servicedurationint;
@@ -97,8 +99,23 @@ public class MainActivity extends AppCompatActivity {
                     sb1.append(line1);
                 }
                 orddate = sb1.toString();
-                orddateTextView.setText(orddate);
+
+                try
+                {
+                    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(orddate);
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+                    strDate = formatter.format(date1);
+
+                }
+                catch (ParseException e)
+                {
+
+                }
+                orddateTextView.setText(strDate);
+                //orddateTextView.setText(orddate);
                 System.out.println("ORD Date from file: " + orddate);
+
+
             }
             catch(IOException e)
             {
@@ -154,10 +171,14 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(numofdayspercentage);
 
                 percentage = findViewById(R.id.percentage);
+                textview5 = findViewById(R.id.textView5);
 
                 if(percentagevalue >= 100)
                 {
-                    percentage.setText("100%");
+                    percentage.setText("Successful");
+                    textview5.setText(" transition to civilian");
+                    percentage.setTextColor(Color.parseColor("#33d533"));
+
                 }
                 else{
                     percentage.setText(numofdayspercentage + "%");
@@ -168,15 +189,15 @@ public class MainActivity extends AppCompatActivity {
                 if(numofdays.equals("0")) //if number of days equals to 0, display ORDLO instead
                 {
                     numofdays = "ORDLO!";
-                    daystoord.setText("2 YEARS VERY FAST RIGHT?");
+                    daystoord.setText("Where Got Time?");
                 }
                 else if(numofdays.equals("1"))
                 {
-                    daystoord.setText("DAY TO ORD");
+                    daystoord.setText("Day to ORD");
                 }
                 else if(numofdays.charAt(0) == '-'){
                     numofdays = "WADIO!";
-                    daystoord.setText("BRO, YOU ORD ALREADY...");
+                    daystoord.setText("Next Chapter In Life Awaits!");
                 }
 
                 numofdaysTextView = findViewById(R.id.numofdaysTextView);

@@ -46,10 +46,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="SETTINGS"
+        android:text="Settings"
         android:textColor="@android:color/white"
         android:textSize="30sp"
-        app:fontFamily="@font/avenirbold"
+        app:fontFamily="@font/nexabold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,17 +83,17 @@
                 android:layout_margin="5dp"
                 app:srcCompat="@drawable/ordwhite2" />
 
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="4dp"
-                android:text="ORD DATE:"
+                android:text="ORD Date:"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                app:fontFamily="@font/avenirbold" />
+                app:fontFamily="@font/nexabold" />
 
             <TextView
                 android:id="@+id/orddateTextView"
@@ -105,8 +105,7 @@
                 android:text="28/18/2019"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                app:fontFamily="@font/avenirbold" />
+                app:fontFamily="@font/nexabold" />
 
             <Button
                 android:id="@+id/setorddateButton"
@@ -158,10 +157,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="10dp"
-                    android:text="LEAVE QUOTA:"
+                    android:text="Leave Quota:"
                     android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/avenirbold" />
+                    app:fontFamily="@font/nexabold" />
 
                 <EditText
                     android:id="@+id/leavequotaEditText"
@@ -172,7 +170,7 @@
                     android:ems="10"
                     android:inputType="numberDecimal"
                     android:paddingTop="5dp"
-                    android:text="89"
+                    android:text="0"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -219,10 +217,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="10dp"
-                    android:text="OFF QUOTA:"
+                    android:text="OFF Quota:"
                     android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/avenirbold" />
+                    app:fontFamily="@font/nexabold" />
 
                 <EditText
                     android:id="@+id/offquotaEditText"
@@ -233,7 +230,7 @@
                     android:ems="10"
                     android:inputType="numberDecimal"
                     android:paddingTop="5dp"
-                    android:text="45"
+                    android:text="0"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
