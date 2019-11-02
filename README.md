@@ -26,4 +26,4 @@
 
 **Bugs fixed:**
 * Disallowed backup in Manifest.xml as it was affecting reinstallation
-* Resized Logo down to below 2048x2048 due to hardware acceleration no displaying correctly
+* Resized Logo down to below 2048x2048 due to hardware acceleration not displaying imageview correctly
