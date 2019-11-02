@@ -1,6 +1,6 @@
 # ORDcounter
 
-## Version 1.0.3 caa 02/11/2019
+## Version 2.0 caa 02/11/2019
 
 **Updates:**
 * Added Payday Counter
@@ -12,6 +12,8 @@
 * Added percentage towards civilian life
 * Added Logo
 * Changed package name to 'ordcounter'
+* Cleaned UI
+* Changed ORD Date format on main activity
 
 **Features to add:**
 * Progress/Percentage bar
