@@ -1,6 +1,6 @@
 # ORDcounter
 
-## Version 1.0.2 caa 08/09/2019
+## Version 1.0.3 caa 02/11/2019
 
 **Updates:**
 * Added Payday Counter
@@ -11,6 +11,7 @@
 * Added Banner Ads with test device configured
 * Added percentage towards civilian life
 * Added Logo
+* Changed package name to 'ordcounter'
 
 **Features to add:**
 * Progress/Percentage bar
@@ -23,3 +24,4 @@
 
 **Bugs fixed:**
 * Disallowed backup in Manifest.xml as it was affecting reinstallation
+* Resized Logo down to below 2048x2048 due to hardware acceleration no displaying correctly
