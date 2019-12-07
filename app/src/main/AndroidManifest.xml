@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lifeisaparty.ordcounter">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-
         android:allowBackup="false"
         android:icon="@mipmap/androidlogov1"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/androidlogov1_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".newuxdesign"></activity>
         <activity
-            android:name="com.lifeisaparty.ordcounter.ServiceDurationActivity"
+            android:name=".ServiceDurationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lifeisaparty.ordcounter.EnlistmentDateActivity"
+            android:name=".EnlistmentDateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lifeisaparty.ordcounter.SettingsActivity"
+            android:name=".SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lifeisaparty.ordcounter.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2502682919080610~9363656451"/>
+            android:value="ca-app-pub-2502682919080610~9363656451" />
     </application>
 
 </manifest>

@@ -28,6 +28,7 @@ public class ServiceDurationActivity extends AppCompatActivity {
     String orddate;
     String leavequota = "0";
     String offquota = "0";
+    String payday = "10";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,15 @@ public class ServiceDurationActivity extends AppCompatActivity {
                                 fstream = openFileOutput("offquota.txt", MODE_PRIVATE);
                                 fstream.write(offquota.getBytes());
                                 fstream.close();
+                                try{ //generate new payday file with value 10
+                                    fstream = openFileOutput("payday.txt", MODE_PRIVATE);
+                                    fstream.write(payday.getBytes());
+                                    fstream.close();
+                                }
+                                catch (Exception e)
+                                {
+
+                                }
                             }
                             catch(Exception e)
                             {
@@ -135,6 +145,15 @@ public class ServiceDurationActivity extends AppCompatActivity {
                                 fstream = openFileOutput("offquota.txt", MODE_PRIVATE);
                                 fstream.write(offquota.getBytes());
                                 fstream.close();
+                                try{ //generate new payday file with value 10
+                                    fstream = openFileOutput("payday.txt", MODE_PRIVATE);
+                                    fstream.write(payday.getBytes());
+                                    fstream.close();
+                                }
+                                catch (Exception e)
+                                {
+
+                                }
                             }
                             catch(Exception e)
                             {

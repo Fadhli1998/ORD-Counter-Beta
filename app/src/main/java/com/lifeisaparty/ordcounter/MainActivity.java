@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -15,9 +18,13 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,10 +54,12 @@ public class MainActivity extends AppCompatActivity {
     String numofdaystopayday;
     String numofdayspercentage;
     String strDate;
+    String payday;
     int percentagevalue;
     int numofdaysint;
     int servicedurationint;
     private AdView adView;
+    ProgressBar pgb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +70,15 @@ public class MainActivity extends AppCompatActivity {
         leavequotaTextView = findViewById(R.id.leavequotaTextView);
         offquotaTextView = findViewById(R.id.offquotaTextView);
         daystoord = findViewById(R.id.daystoord);
-        adView = findViewById(R.id.adView);
+        pgb = findViewById(R.id.pgb);
+        //adView = findViewById(R.id.adView);
 
-        MobileAds.initialize(this, "ca-app-pub-2502682919080610~9363656451");
+        /*MobileAds.initialize(this, "ca-app-pub-2502682919080610~9363656451");
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("BEFCC33F15BE0781B429954DD2897110")
                 .build();
-        adView.loadAd(adRequest);
+        adView.loadAd(adRequest);*/
 
         //Check if enlistmentdate.txt exists in Internal Storage. If enlistmentdate.txt does not exist, the rest does not exist. *bug needs to fix.
         try{
@@ -167,6 +177,8 @@ public class MainActivity extends AppCompatActivity {
                 //calculating percentage towards civilian life
                 percentagevalue = (numofdaysint * 100)/servicedurationint;
 
+                pgb.setProgress(percentagevalue);
+
                 numofdayspercentage = Integer.toString(percentagevalue);
                 System.out.println(numofdayspercentage);
 
@@ -175,8 +187,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if(percentagevalue >= 100)
                 {
-                    percentage.setText("Successful");
-                    textview5.setText(" transition to civilian");
+                    percentage.setText("100%");
+                    textview5.setText(" completion of NS");
+                    //percentage.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+                    //textview5.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
                     percentage.setTextColor(Color.parseColor("#33d533"));
 
                 }
@@ -185,10 +199,13 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
+                numofdaysTextView = findViewById(R.id.numofdaysTextView);
+
 
                 if(numofdays.equals("0")) //if number of days equals to 0, display ORDLO instead
                 {
                     numofdays = "ORDLO!";
+                    //numofdaysTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
                     daystoord.setText("Where Got Time?");
                 }
                 else if(numofdays.equals("1"))
@@ -196,11 +213,11 @@ public class MainActivity extends AppCompatActivity {
                     daystoord.setText("Day to ORD");
                 }
                 else if(numofdays.charAt(0) == '-'){
-                    numofdays = "WADIO!";
-                    daystoord.setText("Next Chapter In Life Awaits!");
+                    numofdays = "ORDLO!";
+                    //numofdaysTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
+                    daystoord.setText("Work Or Study?");
                 }
 
-                numofdaysTextView = findViewById(R.id.numofdaysTextView);
                 numofdaysTextView.setText(numofdays);
 
             }
@@ -211,6 +228,29 @@ public class MainActivity extends AppCompatActivity {
 
             //Payday
             try{
+
+                try {
+                    FileInputStream fIn1 = openFileInput("payday.txt");
+                    InputStreamReader isr1 = new InputStreamReader(fIn1);
+                    BufferedReader bufferedReader1 = new BufferedReader(isr1);
+                    StringBuilder sb1 = new StringBuilder();
+                    String line1;
+                    while ((line1 = bufferedReader1.readLine()) != null) {
+                        sb1.append(line1);
+                    }
+                    payday = sb1.toString();
+                    //leavequotaTextView.setText(leavequota);
+                    System.out.println("Payday from file: " + payday);
+                }
+                catch (IOException e) //update from v2 to v3, need to create payday.txt file with default payday as 10th
+                {
+                    payday = "10";
+                    FileOutputStream fstream;
+                    fstream = openFileOutput("payday.txt", MODE_PRIVATE);
+                    fstream.write(payday.getBytes());
+                    fstream.close();
+                }
+
                 Date getcurrentdate = new Date();
                 String formattedgetcurrentdate = sdf2.format(getcurrentdate);
                 getcurrentdate = sdf2.parse(formattedgetcurrentdate);
@@ -241,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
                 month = Integer.toString(currentmonth);
                 year = Integer.toString(currentyear);
 
-                paydaydatestring = "10/" + month + "/" + year;
+                paydaydatestring = payday + "/" + month + "/" + year;
                 System.out.println(paydaydatestring);
 
                 Date paydaydate = sdf2.parse(paydaydatestring);
@@ -325,10 +365,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             }
         });
-
-    }
-
-    public void checkdaystopayday(){
 
     }
 

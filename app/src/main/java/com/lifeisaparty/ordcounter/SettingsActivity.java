@@ -9,18 +9,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
+
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -36,10 +36,14 @@ public class SettingsActivity extends AppCompatActivity {
     String offquotatowrite;
     String leavequota;
     String offquota;
+    String payday;
     FileOutputStream fstream;
     EditText leavequotaEditText;
     EditText offquotaEditText;
+    RadioButton paydayradiobutton10th;
+    RadioButton paydayradiobutton12th;
     private AdView adView;
+    public static TextView data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +53,21 @@ public class SettingsActivity extends AppCompatActivity {
         savebutton = findViewById(R.id.savebutton);
         setorddateButton = findViewById(R.id.setorddateButton);
         orddateTextView = findViewById(R.id.orddateTextView);
-        adView = findViewById(R.id.adView);
+        paydayradiobutton10th = findViewById(R.id.radioButton10th);
+        paydayradiobutton12th = findViewById(R.id.radioButton12th);
+        //adView = findViewById(R.id.adView);
 
-        MobileAds.initialize(this, "ca-app-pub-2502682919080610~9363656451");
+        /*MobileAds.initialize(this, "ca-app-pub-2502682919080610~9363656451");
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("BEFCC33F15BE0781B429954DD2897110")
                 .build();
-        adView.loadAd(adRequest);
+        adView.loadAd(adRequest);*/
 
         showOrdDate(); //show ord date on settings launch
         showLeaveQuota(); // show Leave Quota on settings launch
         showOffQuota(); // show Off Quota on settings launch
+        showPayday();
 
         //Button for Calendar Dialog to allow user to set ORD date
         setorddateButton.setOnClickListener(new View.OnClickListener() {
@@ -91,11 +98,13 @@ public class SettingsActivity extends AppCompatActivity {
                 writeorddatetofile();
                 writeleavequotatofile();
                 writeoffquotatofile();
+                writepaydaytofile();
                 openMainActivity();
             }
         });
 
     }
+
 
 
     //show ORD Date from file on settings launch function from file
@@ -168,6 +177,34 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    //Read Payday from file and display to Payday Radio Group
+    public void showPayday(){
+        try{
+            FileInputStream fIn = openFileInput("payday.txt");
+            InputStreamReader isr = new InputStreamReader(fIn);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line);
+            }
+            payday = sb.toString();
+            if(payday.equals("10"))
+            {
+                paydayradiobutton10th.setChecked(true);
+            }
+            else
+            {
+                paydayradiobutton12th.setChecked(true);
+            }
+            System.out.println("Payday Quota from file: " + payday);
+        }
+        catch(IOException e)
+        {
+
+        }
+    }
+
     //Write Ord date to file
     public void writeorddatetofile(){
 
@@ -222,6 +259,27 @@ public class SettingsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    //Write Payday to file
+    public void writepaydaytofile(){
+
+        try{
+            fstream = openFileOutput("payday.txt", MODE_PRIVATE);
+            if(paydayradiobutton10th.isChecked())
+            {
+                payday = "10";
+            }
+            else if(paydayradiobutton12th.isChecked())
+            {
+                payday = "12";
+            }
+            fstream.write(payday.getBytes());
+            fstream.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     //User click save button and get redirected to main page.  (To ensure that when user backpressed from main activity, it does not return to settings activity)
