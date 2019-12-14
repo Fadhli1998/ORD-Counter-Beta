@@ -1,6 +1,6 @@
 # ORDcounter
 
-## Version 2.0 caa 02/11/2019
+## Version 3.0 caa 07/12/2019 (Ongoing production)
 
 **Updates:**
 * Added Payday Counter
@@ -14,15 +14,18 @@
 * Changed package name to 'ordcounter'
 * Cleaned UI
 * Changed ORD Date format on main activity
+* Revammped UI (Uses Constraint layouts instead of relative layouts for more flexibility and caters to different screen sizes)
+* Added percentage progress bar
+* Added option to choose payday (10th/12th)
 
 **Features to add:**
-* Progress/Percentage bar
 * Side Navigation Bar
 * IPPT Tracker (?)
 * Fieldcamp/exercises countdown
 
 **Bugs to fix:**
 * Input validation **(IMPORTANT)**
+* Need to change transition effect fromm settings back to main activity
 
 **Bugs fixed:**
 * Disallowed backup in Manifest.xml as it was affecting reinstallation
