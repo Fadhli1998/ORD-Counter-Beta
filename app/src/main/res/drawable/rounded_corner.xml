@@ -3,9 +3,9 @@
     <solid android:color="#2F4562" />
     <!--border color and border width-->
     <stroke
-        android:width="15dp"
+        android:width="3dp"
         android:color="#2F4562" />
     <!--border radius in dp-->
-    <corners android:radius="2dp" />
+    <corners android:radius="3dp" />
 </shape>
 
