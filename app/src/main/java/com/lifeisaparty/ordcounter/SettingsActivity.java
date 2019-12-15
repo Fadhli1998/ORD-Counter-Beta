@@ -11,9 +11,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
+//import com.google.android.gms.ads.MobileAds;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -42,8 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
     EditText offquotaEditText;
     RadioButton paydayradiobutton10th;
     RadioButton paydayradiobutton12th;
-    private AdView adView;
-    public static TextView data;
+    //private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +125,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         catch(IOException e)
         {
-
+            //no catch
         }
 
     }
@@ -150,7 +149,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         catch(IOException e)
         {
-
+            //no catch
         }
     }
 
@@ -173,7 +172,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         catch(IOException e)
         {
-
+            //no catch
         }
     }
 
@@ -201,7 +200,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         catch(IOException e)
         {
-
+            //no catch
         }
     }
 

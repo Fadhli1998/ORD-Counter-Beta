@@ -6,25 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
+//import com.google.android.gms.ads.MobileAds;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+//import java.net.HttpURLConnection;
+//import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -58,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
     int percentagevalue;
     int numofdaysint;
     int servicedurationint;
-    private AdView adView;
+    //private AdView adView;
     ProgressBar pgb;
+    int workdays = 0;
+    TextView workingdays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         offquotaTextView = findViewById(R.id.offquotaTextView);
         daystoord = findViewById(R.id.daystoord);
         pgb = findViewById(R.id.pgb);
+        workingdays = findViewById(R.id.workingdays);
         //adView = findViewById(R.id.adView);
+
 
         /*MobileAds.initialize(this, "ca-app-pub-2502682919080610~9363656451");
         AdRequest adRequest = new AdRequest.Builder()
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (ParseException e)
                 {
-
+                    //no catch
                 }
                 orddateTextView.setText(strDate);
                 //orddateTextView.setText(orddate);
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             }
             catch(IOException e)
             {
-
+                //no catch
             }
 
             try
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             }
             catch (IOException e)
             {
-
+                //no catch
             }
 
             SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
@@ -174,10 +175,35 @@ public class MainActivity extends AppCompatActivity {
                 numofdaysint = servicedurationint - (int)diff1;
                 System.out.println("Number of Days till ORD: " + numofdays);
 
+                //calculating number of weekdays between the 2 dates
+                Calendar startCal = Calendar.getInstance();
+                startCal.setTime(currentdate);
+
+                Calendar endCal = Calendar.getInstance();
+                endCal.setTime(orddateend);
+
+                do{
+                    startCal.add(Calendar.DAY_OF_MONTH, 1); //excluding start date
+                    if(startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
+                    {
+                        ++workdays;
+                    }
+                } while (startCal.getTimeInMillis() < endCal.getTimeInMillis()); //excluding end date
+
+                workingdays.setText(Integer.toString(workdays));
+
+
                 //calculating percentage towards civilian life
                 percentagevalue = (numofdaysint * 100)/servicedurationint;
 
-                pgb.setProgress(percentagevalue);
+                if(percentagevalue > 100 || percentagevalue < 0) //if percentage goes over 100% for some reason (user input ord date more than 730 days from currentdate)
+                {
+                    pgb.setProgress(0);
+                }
+                else
+                {
+                    pgb.setProgress(percentagevalue);
+                }
 
                 numofdayspercentage = Integer.toString(percentagevalue);
                 System.out.println(numofdayspercentage);
@@ -185,14 +211,18 @@ public class MainActivity extends AppCompatActivity {
                 percentage = findViewById(R.id.percentage);
                 textview5 = findViewById(R.id.textView5);
 
-                if(percentagevalue >= 100)
+                if(percentagevalue == 100) //if percentage reaches 100%
                 {
                     percentage.setText("100%");
-                    textview5.setText(" completion of NS");
+                    textview5.setText(" done with NS");
                     //percentage.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
                     //textview5.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
                     percentage.setTextColor(Color.parseColor("#33d533"));
 
+                }
+                else if(percentagevalue > 100 || percentagevalue < 0) //if percentage more than 100 or less than 0
+                {
+                    percentage.setText("0%");
                 }
                 else{
                     percentage.setText(numofdayspercentage + "%");
@@ -223,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
             }
             catch(ParseException e)
             {
-
+                //no catch
             }
 
             //Payday
@@ -296,9 +326,9 @@ public class MainActivity extends AppCompatActivity {
                 if(numofdaystopayday.equals("0")) //if day to payday is equal to 0, change paydaysign to "TODAY IS..." and text to "PAYDAY!"
                 {
                     daystopaydaysign = findViewById(R.id.daystopayday);
-                    daystopaydaysign.setText("TODAY IS...");
-                    daystopayday.setText("PAYDAY!");
-                    daystopayday.setTextColor(Color.parseColor("#33d533")); //set text colour to green
+                    daystopaydaysign.setText("Today is Payday!");
+                    daystopayday.setText(" ");
+                    daystopaydaysign.setTextColor(Color.parseColor("#33d533")); //set text colour to green
                 }
                 else
                 {
@@ -308,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
             }
             catch(ParseException e)
             {
-
+                //no catch
             }
 
             //Get leave and off quota from file and display to activity
@@ -340,13 +370,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch(IOException e)
                 {
-
+                    //no catch
                 }
 
             }
             catch(IOException e)
             {
-
+                //no catch
             }
 
 
