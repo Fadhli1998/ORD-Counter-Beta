@@ -1,6 +1,6 @@
 # ORDcounter
 
-## Version 3.0 caa 07/12/2019 (Ongoing production)
+## Version 4.0 caa 15/12/2019
 
 **Updates:**
 * Added Payday Counter
@@ -8,15 +8,17 @@
 * Changed font/icon colour to white
 * Rounded Linearlayout for professional look
 * Slight changes to Settings Activity UI (layouts)
-* Added Banner Ads with test device configured
+* Added Banner Ads with test device configured (Removed (Commented) due to lack of response)
 * Added percentage towards civilian life
 * Added Logo
 * Changed package name to 'ordcounter'
 * Cleaned UI
 * Changed ORD Date format on main activity
 * Revammped UI (Uses Constraint layouts instead of relative layouts for more flexibility and caters to different screen sizes)
-* Added percentage progress bar
+* Added percentage progress bar, changed design and updated colour
 * Added option to choose payday (10th/12th)
+* Added Working days
+* Cleaned Code
 
 **Features to add:**
 * Side Navigation Bar
