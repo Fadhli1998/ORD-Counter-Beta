@@ -4,397 +4,116 @@ package com.lifeisaparty.ordcounter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
 //import com.google.android.gms.ads.AdRequest;
 //import com.google.android.gms.ads.AdView;
 //import com.google.android.gms.ads.MobileAds;
-
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//import java.net.HttpURLConnection;
-//import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    String enlistmentdate;
+    Button settingsbutton;
+    TextView ord_date_textview;
+    TextView leave_quota_textview;
+    TextView off_quota_textview;
+    TextView payday_textview;
+    TextView ord_countdown_textview;
+    TextView working_days_textview;
     String orddate;
-    String numofdays;
-    String leavequota;
-    String offquota;
-    String serviceduration;
-    TextView numofdaysTextView;
-    TextView orddateTextView;
-    TextView leavequotaTextView;
-    TextView offquotaTextView;
-    TextView daystoord;
-    TextView daystopayday;
-    TextView daystopaydaysign;
-    TextView percentage;
-    TextView textview5;
-    String month;
-    String year;
-    String paydaydatestring;
-    String numofdaystopayday;
-    String numofdayspercentage;
-    String strDate;
-    String payday;
-    int percentagevalue;
-    int numofdaysint;
-    int servicedurationint;
-    //private AdView adView;
-    ProgressBar pgb;
-    int workdays = 0;
-    TextView workingdays;
+    int leavequota;
+    int offquota;
+    int payday;
+    String currentdate;
+    CircularSeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        orddateTextView = findViewById(R.id.orddateTextView);
-        leavequotaTextView = findViewById(R.id.leavequotaTextView);
-        offquotaTextView = findViewById(R.id.offquotaTextView);
-        daystoord = findViewById(R.id.daystoord);
-        pgb = findViewById(R.id.pgb);
-        workingdays = findViewById(R.id.workingdays);
-        //adView = findViewById(R.id.adView);
+        updatecontigency();
 
+        //Initialize all buttons/textviews/edittext here
+        settingsbutton = findViewById(R.id.settingsbutton);
+        ord_date_textview = findViewById(R.id.ord_date_textview);
+        leave_quota_textview = findViewById(R.id.leave_quota_textview);
+        off_quota_textview = findViewById(R.id.off_quota_textview);
+        payday_textview = findViewById(R.id.payday_textview);
+        ord_countdown_textview = findViewById(R.id.ord_countdown_textview);
+        working_days_textview = findViewById(R.id.working_days_textview);
+        seekBar = findViewById(R.id.seekBar);
 
-        /*MobileAds.initialize(this, "ca-app-pub-2502682919080610~9363656451");
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("BEFCC33F15BE0781B429954DD2897110")
-                .build();
-        adView.loadAd(adRequest);*/
+        seekBar.isTouchEnabled = false;
+        seekBar.setProgress(80);
 
-        //Check if enlistmentdate.txt exists in Internal Storage. If enlistmentdate.txt does not exist, the rest does not exist. *bug needs to fix.
-        try{
-            FileInputStream fIn = openFileInput("enlistmentdate.txt");
-            FileInputStream fIn3 = openFileInput("serviceduration.txt"); //also check if serviceduration.txt exists
-            System.out.println("Enlistment Date File Found.");
+        Dates date = new Dates();
+        currentdate = date.getcurrentdate();
 
-            //If file is found, read enlistmentdate from file and add to variable.
-            InputStreamReader isr = new InputStreamReader(fIn);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line);
-            }
-            enlistmentdate = sb.toString();
-            System.out.println("Enlistment Date: " + enlistmentdate);
+        //Use sharedpreferences to read user data
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 
-            //Get ORD Date from file instead of manually calculating on each launch
-            try
-            {
-                FileInputStream fIn1 = openFileInput("orddate.txt");
-                InputStreamReader isr1 = new InputStreamReader(fIn1);
-                BufferedReader bufferedReader1 = new BufferedReader(isr1);
-                StringBuilder sb1 = new StringBuilder();
-                String line1;
-                while ((line1 = bufferedReader1.readLine()) != null) {
-                    sb1.append(line1);
-                }
-                orddate = sb1.toString();
+        orddate = sharedPreferences.getString("orddate", "");
+        leavequota = sharedPreferences.getInt("leavequota", 0);
+        offquota = sharedPreferences.getInt("offquota", 0);
+        payday = sharedPreferences.getInt("payday", 10);
 
-                try
-                {
-                    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(orddate);
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-                    strDate = formatter.format(date1);
+        ord_date_textview.setText(orddate);
+        leave_quota_textview.setText(Integer.toString(leavequota));
+        off_quota_textview.setText(Integer.toString(offquota));
 
-                }
-                catch (ParseException e)
-                {
-                    //no catch
-                }
-                orddateTextView.setText(strDate);
-                //orddateTextView.setText(orddate);
-                System.out.println("ORD Date from file: " + orddate);
+        date.orddate = orddate;
+        date.payday = payday;
+        //Breakpoint to check value
+        //System.out.println("Todays date is: " + date.getcurrentdate());
+        //System.out.println("Days till ORD: " + date.daystillord());
+        //System.out.println("Days till Payday: " + date.daystillpayday());
 
+        ord_countdown_textview.setText(date.daystillord());
+        payday_textview.setText(date.daystillpayday());
+        working_days_textview.setText(date.workingdays());
 
-            }
-            catch(IOException e)
-            {
-                //no catch
-            }
-
-            try
-            {
-                FileInputStream fIn1 = openFileInput("serviceduration.txt");
-                InputStreamReader isr1 = new InputStreamReader(fIn1);
-                BufferedReader bufferedReader1 = new BufferedReader(isr1);
-                StringBuilder sb1 = new StringBuilder();
-                String line1;
-                while ((line1 = bufferedReader1.readLine()) != null) {
-                    sb1.append(line1);
-                }
-                serviceduration = sb1.toString();
-
-                if(serviceduration.equals("2 YEARS"))
-                {
-                    servicedurationint = 730;
-                }
-                else
-                {
-                    servicedurationint = 669;
-                }
-
-            }
-            catch (IOException e)
-            {
-                //no catch
-            }
-
-            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
-            try
-            {
-                Date getcurrentdate = new Date();
-                String formattedcurrentdate = sdf2.format(getcurrentdate);
-                Date currentdate = sdf2.parse(formattedcurrentdate);
-                System.out.println("Todays Date: " + formattedcurrentdate);
-                Date orddateend = sdf2.parse(orddate);
-
-                long diff = orddateend.getTime() - currentdate.getTime(); //calculate number of days between current date and ord date
-                long diff1 = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-                numofdays = Long.toString(diff1); //converting long to string so as to be able to use variable as string
-                numofdaysint = servicedurationint - (int)diff1;
-                System.out.println("Number of Days till ORD: " + numofdays);
-
-                //calculating number of weekdays between the 2 dates
-                Calendar startCal = Calendar.getInstance();
-                startCal.setTime(currentdate);
-
-                Calendar endCal = Calendar.getInstance();
-                endCal.setTime(orddateend);
-
-                do{
-                    startCal.add(Calendar.DAY_OF_MONTH, 1); //excluding start date
-                    if(startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
-                    {
-                        ++workdays;
-                    }
-                } while (startCal.getTimeInMillis() < endCal.getTimeInMillis()); //excluding end date
-
-                workingdays.setText(Integer.toString(workdays));
-
-
-                //calculating percentage towards civilian life
-                percentagevalue = (numofdaysint * 100)/servicedurationint;
-
-                if(percentagevalue > 100 || percentagevalue < 0) //if percentage goes over 100% for some reason (user input ord date more than 730 days from currentdate)
-                {
-                    pgb.setProgress(0);
-                }
-                else
-                {
-                    pgb.setProgress(percentagevalue);
-                }
-
-                numofdayspercentage = Integer.toString(percentagevalue);
-                System.out.println(numofdayspercentage);
-
-                percentage = findViewById(R.id.percentage);
-                textview5 = findViewById(R.id.textView5);
-
-                if(percentagevalue == 100) //if percentage reaches 100%
-                {
-                    percentage.setText("100%");
-                    textview5.setText(" done with NS");
-                    //percentage.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
-                    //textview5.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
-                    percentage.setTextColor(Color.parseColor("#33d533"));
-
-                }
-                else if(percentagevalue > 100 || percentagevalue < 0) //if percentage more than 100 or less than 0
-                {
-                    percentage.setText("0%");
-                }
-                else{
-                    percentage.setText(numofdayspercentage + "%");
-                }
-
-
-                numofdaysTextView = findViewById(R.id.numofdaysTextView);
-
-
-                if(numofdays.equals("0")) //if number of days equals to 0, display ORDLO instead
-                {
-                    numofdays = "ORDLO!";
-                    //numofdaysTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
-                    daystoord.setText("Where Got Time?");
-                }
-                else if(numofdays.equals("1"))
-                {
-                    daystoord.setText("Day to ORD");
-                }
-                else if(numofdays.charAt(0) == '-'){
-                    numofdays = "ORDLO!";
-                    //numofdaysTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
-                    daystoord.setText("Work Or Study?");
-                }
-
-                numofdaysTextView.setText(numofdays);
-
-            }
-            catch(ParseException e)
-            {
-                //no catch
-            }
-
-            //Payday
-            try{
-
-                try {
-                    FileInputStream fIn1 = openFileInput("payday.txt");
-                    InputStreamReader isr1 = new InputStreamReader(fIn1);
-                    BufferedReader bufferedReader1 = new BufferedReader(isr1);
-                    StringBuilder sb1 = new StringBuilder();
-                    String line1;
-                    while ((line1 = bufferedReader1.readLine()) != null) {
-                        sb1.append(line1);
-                    }
-                    payday = sb1.toString();
-                    //leavequotaTextView.setText(leavequota);
-                    System.out.println("Payday from file: " + payday);
-                }
-                catch (IOException e) //update from v2 to v3, need to create payday.txt file with default payday as 10th
-                {
-                    payday = "10";
-                    FileOutputStream fstream;
-                    fstream = openFileOutput("payday.txt", MODE_PRIVATE);
-                    fstream.write(payday.getBytes());
-                    fstream.close();
-                }
-
-                Date getcurrentdate = new Date();
-                String formattedgetcurrentdate = sdf2.format(getcurrentdate);
-                getcurrentdate = sdf2.parse(formattedgetcurrentdate);
-
-                Calendar c = Calendar.getInstance();
-                c.setTime(getcurrentdate);
-
-                int currentmonth = Calendar.getInstance().get(Calendar.MONTH);
-                int currentyear = Calendar.getInstance().get(Calendar.YEAR);
-                int currentday = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-
-                System.out.println(currentday);
-
-
-                if(currentyear == 11)
-                {
-                    currentyear = currentyear + 1;
-                    System.out.println("DID IT WORK: " + currentyear);
-                }
-                else if(currentday <= 10)
-                {
-                    currentmonth = currentmonth + 1;
-                }
-                else{
-                    currentmonth = currentmonth + 2;
-                }
-
-                month = Integer.toString(currentmonth);
-                year = Integer.toString(currentyear);
-
-                paydaydatestring = payday + "/" + month + "/" + year;
-                System.out.println(paydaydatestring);
-
-                Date paydaydate = sdf2.parse(paydaydatestring);
-
-                long diff = paydaydate.getTime() - getcurrentdate.getTime(); //calculate number of days between payday date and ord date
-                long diff1 = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-                numofdaystopayday = Long.toString(diff1); //converting long to string so as to be able to use variable as string
-                System.out.println("Number of Days till Payday: " + numofdaystopayday);
-
-                daystopayday = findViewById(R.id.daystopaydayTextView);
-
-                if(numofdaystopayday.equals("0")) //if day to payday is equal to 0, change paydaysign to "TODAY IS..." and text to "PAYDAY!"
-                {
-                    daystopaydaysign = findViewById(R.id.daystopayday);
-                    daystopaydaysign.setText("Today is Payday!");
-                    daystopayday.setText(" ");
-                    daystopaydaysign.setTextColor(Color.parseColor("#33d533")); //set text colour to green
-                }
-                else
-                {
-                    daystopayday.setText(numofdaystopayday);
-                }
-
-            }
-            catch(ParseException e)
-            {
-                //no catch
-            }
-
-            //Get leave and off quota from file and display to activity
-            try{
-                FileInputStream fIn1 = openFileInput("leavequota.txt");
-                InputStreamReader isr1 = new InputStreamReader(fIn1);
-                BufferedReader bufferedReader1 = new BufferedReader(isr1);
-                StringBuilder sb1 = new StringBuilder();
-                String line1;
-                while ((line1 = bufferedReader1.readLine()) != null) {
-                    sb1.append(line1);
-                }
-                leavequota = sb1.toString();
-                leavequotaTextView.setText(leavequota);
-                System.out.println("Leave Quota from file: " + leavequota);
-
-                try{
-                    FileInputStream fIn2 = openFileInput("offquota.txt");
-                    InputStreamReader isr2 = new InputStreamReader(fIn2);
-                    BufferedReader bufferedReader2 = new BufferedReader(isr2);
-                    StringBuilder sb2 = new StringBuilder();
-                    String line2;
-                    while ((line2 = bufferedReader2.readLine()) != null) {
-                        sb2.append(line2);
-                    }
-                    offquota = sb2.toString();
-                    offquotaTextView.setText(offquota);
-                    System.out.println("Off Quota from file: " + offquota);
-                }
-                catch(IOException e)
-                {
-                    //no catch
-                }
-
-            }
-            catch(IOException e)
-            {
-                //no catch
-            }
-
-
-        }
-        catch (IOException e){ //If enlistmentdate.txt does not exist, go to enlistmentdateactivity
-            System.out.println("File Not Found.");
-            startActivity(new Intent(MainActivity.this, EnlistmentDateActivity.class));
-            finish();
-        }
-
-        //Settings Button to open Settings Menu
-        Button settingsbutton = findViewById(R.id.settingsbutton);
+        //Open Settings on settings button click
         settingsbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                finish(); //ensures that the current activity is destroyed
             }
         });
+    }
+
+    public void updatecontigency(){ //Massive update from Version 4 to Version 5. Scrapped the use of Internal Files. Using Shared Preferences instead. This function is to facilitate the transition.
+
+        //if orddate.txt exists, user is transition from Version 4
+        File file = getBaseContext().getFileStreamPath("orddate.txt");
+        System.out.println(file.exists());
+
+        if(file.exists()){
+            try{
+                FileInputStream fIn1 = getApplicationContext().openFileInput("orddate.txt");
+                InputStreamReader isr = new InputStreamReader(fIn1);
+                BufferedReader bufferedReader = new BufferedReader(isr);
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+                System.out.println(sb);
+
+            } catch (IOException e){
+
+            }
+        }
 
     }
 

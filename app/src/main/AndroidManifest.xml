@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/androidlogov1_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".newuxdesign"></activity>
         <activity
             android:name=".ServiceDurationActivity"
             android:screenOrientation="portrait" />

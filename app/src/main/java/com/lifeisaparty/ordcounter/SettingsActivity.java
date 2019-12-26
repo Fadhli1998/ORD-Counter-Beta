@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,62 +15,58 @@ import android.widget.TextView;
 //import com.google.android.gms.ads.AdRequest;
 //import com.google.android.gms.ads.AdView;
 //import com.google.android.gms.ads.MobileAds;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Calendar;
 
 
 public class SettingsActivity extends AppCompatActivity {
 
+    Button savebutton;
+    Button setorddatebutton;
+    TextView settings_ord_date_textview;
+    EditText leave_quota_edittext;
+    EditText off_quota_edittext;
+    String orddate;
+    int leavequota;
+    int offquota;
+    int payday;
     Calendar c;
     DatePickerDialog dpd;
-    Button savebutton;
-    Button setorddateButton;
-    TextView orddateTextView;
-    String temporddate;
-    String ordddate;
-    String orddatetowrite;
-    String leavequotatowrite;
-    String offquotatowrite;
-    String leavequota;
-    String offquota;
-    String payday;
-    FileOutputStream fstream;
-    EditText leavequotaEditText;
-    EditText offquotaEditText;
-    RadioButton paydayradiobutton10th;
-    RadioButton paydayradiobutton12th;
-    //private AdView adView;
+    RadioButton tenth_radiobutton;
+    RadioButton twelve_radiobutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        //Initialize all buttons/textviews/edittext here
+        settings_ord_date_textview = findViewById(R.id.settings_ord_textview);
+        leave_quota_edittext = findViewById(R.id.leave_quota_edittext);
+        off_quota_edittext = findViewById(R.id.off_quota_edittext);
         savebutton = findViewById(R.id.savebutton);
-        setorddateButton = findViewById(R.id.setorddateButton);
-        orddateTextView = findViewById(R.id.orddateTextView);
-        paydayradiobutton10th = findViewById(R.id.radioButton10th);
-        paydayradiobutton12th = findViewById(R.id.radioButton12th);
-        //adView = findViewById(R.id.adView);
+        setorddatebutton = findViewById(R.id.set_ord_date_button);
+        tenth_radiobutton = findViewById(R.id.tenth_radiobutton);
+        twelve_radiobutton = findViewById(R.id.twelve_radiobutton);
 
-        /*MobileAds.initialize(this, "ca-app-pub-2502682919080610~9363656451");
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("BEFCC33F15BE0781B429954DD2897110")
-                .build();
-        adView.loadAd(adRequest);*/
+        //Use sharedpreferences to save user data
+        final SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        showOrdDate(); //show ord date on settings launch
-        showLeaveQuota(); // show Leave Quota on settings launch
-        showOffQuota(); // show Off Quota on settings launch
-        showPayday();
+        settings_ord_date_textview.setText(sharedPreferences.getString("orddate", ""));
+        leave_quota_edittext.setText(Integer.toString(sharedPreferences.getInt("leavequota", 0)));
+        off_quota_edittext.setText(Integer.toString(sharedPreferences.getInt("offquota", 0)));
+        payday = sharedPreferences.getInt("payday", 0);
 
-        //Button for Calendar Dialog to allow user to set ORD date
-        setorddateButton.setOnClickListener(new View.OnClickListener() {
+        //Check radio button according to user saved payday on SharedPreferences
+        if(payday == 10){
+            tenth_radiobutton.setChecked(true);
+        }
+        else if(payday == 12) {
+            twelve_radiobutton.setChecked(true);
+        }
+
+        //Open Calendar Dialog when user presses the Calendar Edit button and show selected date on ord_date_edittext
+        setorddatebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -77,219 +74,53 @@ public class SettingsActivity extends AppCompatActivity {
                 int day = c.get(Calendar.DAY_OF_MONTH);
                 int month = c.get(Calendar.MONTH);
                 int year = c.get(Calendar.YEAR);
+
                 dpd = new DatePickerDialog(SettingsActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
-                        temporddate = mDay + "/" + (mMonth+1) + "/" + mYear;
-                        orddateTextView.setText(temporddate); //set ord date to Text View
+                        settings_ord_date_textview.setText(mDay + "/" + (mMonth+1) + "/" + mYear);
                     }
                 }, year, month, day);
                 dpd.show();
-
             }
         });
 
-        //When user clicks Save, write data to file and go back to main activity
+        //Save settings on save button click & proceed to main activity
         savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                writeorddatetofile();
-                writeleavequotatofile();
-                writeoffquotatofile();
-                writepaydaytofile();
-                openMainActivity();
+                orddate = settings_ord_date_textview.getText().toString();
+                leavequota = Integer.parseInt(leave_quota_edittext.getText().toString());
+                offquota = Integer.parseInt(off_quota_edittext.getText().toString());
+
+                //save payday according to user input radio
+                if(tenth_radiobutton.isChecked()){
+                    payday = 10;
+                }
+                else if(twelve_radiobutton.isChecked()){
+                    payday = 12;
+                }
+
+
+                editor.putString("orddate", orddate);
+                editor.putInt("leavequota", leavequota);
+                editor.putInt("offquota", offquota);
+                editor.putInt("payday", payday);
+
+                editor.commit();
+
+                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish(); //ensures that the current activity is destroyed
+
             }
         });
-
     }
 
-
-
-    //show ORD Date from file on settings launch function from file
-    public void showOrdDate(){
-
-        try{
-            FileInputStream fIn = openFileInput("orddate.txt");
-            InputStreamReader isr = new InputStreamReader(fIn);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line);
-            }
-            ordddate = sb.toString();
-            orddateTextView = findViewById(R.id.orddateTextView);
-            orddateTextView.setText(ordddate);
-            System.out.println("ORD Date from file: " + ordddate);
-        }
-        catch(IOException e)
-        {
-            //no catch
-        }
-
-    }
-
-    //Read Leave Quota from file and display to Leave Quota Edit Text
-    public void showLeaveQuota(){
-
-        try{
-            FileInputStream fIn = openFileInput("leavequota.txt");
-            InputStreamReader isr = new InputStreamReader(fIn);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line);
-            }
-            leavequota = sb.toString();
-            leavequotaEditText = findViewById(R.id.leavequotaEditText);
-            leavequotaEditText.setText(leavequota);
-            System.out.println("Leave Quota from file: " + leavequota);
-        }
-        catch(IOException e)
-        {
-            //no catch
-        }
-    }
-
-    //Read Off Quota from file and display to Leave Quota Edit Text
-    public void showOffQuota(){
-
-        try{
-            FileInputStream fIn = openFileInput("offquota.txt");
-            InputStreamReader isr = new InputStreamReader(fIn);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line);
-            }
-            offquota = sb.toString();
-            offquotaEditText = findViewById(R.id.offquotaEditText);
-            offquotaEditText.setText(offquota);
-            System.out.println("Off Quota from file: " + offquota);
-        }
-        catch(IOException e)
-        {
-            //no catch
-        }
-    }
-
-    //Read Payday from file and display to Payday Radio Group
-    public void showPayday(){
-        try{
-            FileInputStream fIn = openFileInput("payday.txt");
-            InputStreamReader isr = new InputStreamReader(fIn);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line);
-            }
-            payday = sb.toString();
-            if(payday.equals("10"))
-            {
-                paydayradiobutton10th.setChecked(true);
-            }
-            else
-            {
-                paydayradiobutton12th.setChecked(true);
-            }
-            System.out.println("Payday Quota from file: " + payday);
-        }
-        catch(IOException e)
-        {
-            //no catch
-        }
-    }
-
-    //Write Ord date to file
-    public void writeorddatetofile(){
-
-        try{
-            fstream = openFileOutput("orddate.txt",MODE_PRIVATE);
-            orddatetowrite = orddateTextView.getText().toString(); //get ord date from Text View instead of from calendar dialog directly
-            fstream.write(orddatetowrite.getBytes());
-            fstream.close();
-
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    //Write Leave Quota to file
-    public void writeleavequotatofile(){
-
-        try{
-            fstream = openFileOutput("leavequota.txt",MODE_PRIVATE);
-            leavequotatowrite = leavequotaEditText.getText().toString(); //get ord date from Text View instead of from calendar dialog directly
-            if(leavequotatowrite.equals("")) //if user removes the value, auto default quota value back to 0
-            {
-                leavequotatowrite = "0";
-            }
-            fstream.write(leavequotatowrite.getBytes());
-            fstream.close();
-
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    //Write Off Quota to file
-    public void writeoffquotatofile(){
-
-        try{
-            fstream = openFileOutput("offquota.txt",MODE_PRIVATE);
-            offquotatowrite = offquotaEditText.getText().toString(); //get ord date from Text View instead of from calendar dialog directly
-            if(offquotatowrite.equals("")) //if user removes the value, auto default quota value back to 0
-            {
-                offquotatowrite = "0";
-            }
-            fstream.write(offquotatowrite.getBytes());
-            fstream.close();
-
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    //Write Payday to file
-    public void writepaydaytofile(){
-
-        try{
-            fstream = openFileOutput("payday.txt", MODE_PRIVATE);
-            if(paydayradiobutton10th.isChecked())
-            {
-                payday = "10";
-            }
-            else if(paydayradiobutton12th.isChecked())
-            {
-                payday = "12";
-            }
-            fstream.write(payday.getBytes());
-            fstream.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    //User click save button and get redirected to main page.  (To ensure that when user backpressed from main activity, it does not return to settings activity)
-    public void openMainActivity(){
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); //ensures the app exits when back button is pressed on Main Activity
-        startActivity(intent);
-        finish();
-
+    public void onBackPressed(){
+        startActivity(new Intent(this, MainActivity.class));
+        finish(); //ensures that the current activity is destroyed
     }
 
 }

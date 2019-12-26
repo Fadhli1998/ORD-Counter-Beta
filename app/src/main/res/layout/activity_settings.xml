@@ -7,292 +7,6 @@
     tools:context=".SettingsActivity"
     android:background="#152642">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="-55dp" />
-
-    <!--<com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        app:adSize="SMART_BANNER"
-        app:adUnitId="ca-app-pub-2502682919080610/8271449527"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>-->
-
-    <TextView
-        android:id="@+id/Settingstextview"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Settings"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:fontFamily="@font/montserrat"
-        app:layout_constraintBottom_toTopOf="@+id/orddateborder"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/orddateborder"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rounded_corner" />
-
-    <ImageView
-        android:id="@+id/leaveborder"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orddateborder"
-        app:srcCompat="@drawable/rounded_corner" />
-
-    <ImageView
-        android:id="@+id/offborder"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/leaveborder"
-        app:srcCompat="@drawable/rounded_corner" />
-
-    <ImageView
-        android:id="@+id/paydayborder"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/offborder"
-        app:srcCompat="@drawable/rounded_corner" />
-
-    <ImageView
-        android:id="@+id/orddateicon"
-        android:layout_width="30dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/orddateborder"
-        app:layout_constraintStart_toStartOf="@+id/orddateborder"
-        app:layout_constraintTop_toTopOf="@+id/orddateborder"
-        app:srcCompat="@drawable/ordwhite2" />
-
-    <ImageView
-        android:id="@+id/leaveicon"
-        android:layout_width="30dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/leaveborder"
-        app:layout_constraintStart_toStartOf="@+id/leaveborder"
-        app:layout_constraintTop_toTopOf="@+id/leaveborder"
-        app:srcCompat="@drawable/leavewhite2" />
-
-    <ImageView
-        android:id="@+id/officon"
-        android:layout_width="30dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/offborder"
-        app:layout_constraintStart_toStartOf="@+id/offborder"
-        app:layout_constraintTop_toTopOf="@+id/offborder"
-        app:srcCompat="@drawable/offwhite2" />
-
-    <ImageView
-        android:id="@+id/paydayicon"
-        android:layout_width="30dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/paydayborder"
-        app:layout_constraintStart_toStartOf="@+id/paydayborder"
-        app:layout_constraintTop_toTopOf="@+id/paydayborder"
-        app:srcCompat="@drawable/paydaywhite2" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="ORD Date:"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:fontFamily="@font/montserrat"
-        app:layout_constraintBottom_toBottomOf="@+id/orddateborder"
-        app:layout_constraintStart_toEndOf="@+id/orddateicon"
-        app:layout_constraintTop_toTopOf="@+id/orddateborder" />
-
-    <TextView
-        android:id="@+id/orddateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="23/10/2020"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:fontFamily="@font/montserrat"
-        app:layout_constraintBottom_toBottomOf="@+id/orddateborder"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/orddateborder" />
-
-    <TextView
-        android:id="@+id/leavequotasign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Leave Quota:"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:fontFamily="@font/montserrat"
-        app:layout_constraintBottom_toBottomOf="@+id/leaveborder"
-        app:layout_constraintStart_toEndOf="@+id/leaveicon"
-        app:layout_constraintTop_toTopOf="@+id/leaveborder" />
-
-    <EditText
-        android:id="@+id/leavequotaEditText"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:backgroundTint="@android:color/white"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="numberDecimal"
-        android:textColor="@android:color/white"
-        app:fontFamily="@font/montserrat"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/leaveborder"
-        app:layout_constraintStart_toEndOf="@+id/leavequotasign"
-        app:layout_constraintTop_toTopOf="@+id/leaveborder"
-        tools:text="19.6" />
-
-    <TextView
-        android:id="@+id/offquotasign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="OFF Quota:"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:fontFamily="@font/montserrat"
-        app:layout_constraintBottom_toBottomOf="@+id/offborder"
-        app:layout_constraintStart_toEndOf="@+id/officon"
-        app:layout_constraintTop_toTopOf="@+id/offborder" />
-
-    <EditText
-        android:id="@+id/offquotaEditText"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:backgroundTint="@android:color/white"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="numberDecimal"
-        android:text="10.5"
-        android:textColor="@android:color/white"
-        app:fontFamily="@font/montserrat"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/offborder"
-        app:layout_constraintStart_toEndOf="@+id/offquotasign"
-        app:layout_constraintTop_toTopOf="@+id/offborder" />
-
-    <TextView
-        android:id="@+id/paydaytextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Payday:"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:fontFamily="@font/montserrat"
-        app:layout_constraintBottom_toBottomOf="@+id/paydayborder"
-        app:layout_constraintStart_toEndOf="@+id/paydayicon"
-        app:layout_constraintTop_toTopOf="@+id/paydayborder" />
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="28dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/paydayborder"
-        app:layout_constraintStart_toEndOf="@+id/paydaytextview"
-        app:layout_constraintTop_toTopOf="@+id/paydayborder">
-
-        <RadioButton
-            android:id="@+id/radioButton10th"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="#FFFFFF"
-            android:text="10th"
-            android:textColor="@android:color/white"
-            app:fontFamily="@font/montserrat"
-            android:textStyle="bold" />
-
-        <RadioButton
-            android:id="@+id/radioButton12th"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:buttonTint="#FFFFFF"
-            android:text="12th"
-            android:textColor="@android:color/white"
-            app:fontFamily="@font/montserrat"
-            android:textStyle="bold" />
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/setorddateButton"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/editiconwhite"
-        app:layout_constraintBottom_toBottomOf="@+id/orddateborder"
-        app:layout_constraintEnd_toEndOf="@+id/orddateborder"
-        app:layout_constraintTop_toTopOf="@+id/orddateborder" />
-
     <Button
         android:id="@+id/savebutton"
         android:layout_width="0dp"
@@ -302,25 +16,137 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#CC0000"
-        android:text="Save changes"
-        android:textColor="@color/androidlogo_background"
-        android:textStyle="bold"
-        app:fontFamily="@font/montserrat"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!--<com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/settings_leave_quota_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        app:adSize="SMART_BANNER"
-        app:adUnitId="ca-app-pub-2502682919080610/8271449527"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>-->
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/leave_quota"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_ord_label" />
+
+    <TextView
+        android:id="@+id/settings_off_quota_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/off_quota"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_leave_quota_label" />
+
+    <TextView
+        android:id="@+id/settings_payday_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/payday_quota"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_off_quota_label" />
+
+    <EditText
+        android:id="@+id/leave_quota_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/settings_leave_quota_label"
+        app:layout_constraintTop_toBottomOf="@+id/settings_ord_textview" />
+
+    <EditText
+        android:id="@+id/off_quota_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/settings_off_quota_label"
+        app:layout_constraintTop_toBottomOf="@+id/leave_quota_edittext" />
+
+    <Button
+        android:id="@+id/set_ord_date_button"
+        android:layout_width="98dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="64dp"
+        android:text="SET"
+        app:layout_constraintStart_toEndOf="@+id/settings_ord_textview"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settings_ord_textview"
+        android:layout_width="147dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="64dp"
+        android:text="TextView"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toEndOf="@+id/settings_ord_label"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/settings_ord_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/ord_date"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/payday_radiogroup"
+        android:layout_width="158dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/settings_payday_label"
+        app:layout_constraintTop_toBottomOf="@+id/off_quota_edittext">
+
+        <RadioButton
+            android:id="@+id/tenth_radiobutton"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/tenth"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/twelve_radiobutton"
+            android:layout_width="84dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/twelve"
+            android:textColor="@android:color/white" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
